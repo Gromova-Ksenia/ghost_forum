@@ -17,8 +17,10 @@ import java.util.UUID;
 public class UserDto {
     private UUID id;
     private String login;
+    private String password;
+    private String email;
     private String username;
-    private String description;
     private LocalDate registrationDate;
+    private String description;
     private Set<Role> roles;
 }

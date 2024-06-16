@@ -6,7 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.project.ghost_forum.dto.UserDto;
-import org.project.ghost_forum.dto.UserRegistrationDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -14,13 +14,16 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class EncryptAnnotationAspect {
+    @Autowired
     private final PasswordEncoder passwordEncoder;
 
+    //Если Encrypt и в аргументах дто - будет шифрование
     @Pointcut("@annotation(Encrypt) && args(userDto,..)")
-    public void callEncryptableMethod(UserRegistrationDto userDto) {}
+    public void callEncryptableMethod(UserDto userDto) {}
 
+    //Оповещалка до шифрования
     @Before(value = "callEncryptableMethod(userDto)", argNames = "userDto")
-    public void beforeCallEncryptableMethod(UserRegistrationDto userDto) {
+    public void beforeCallEncryptableMethod(UserDto userDto) {
         System.out.println("Пароль будет зашифрован!");
         System.out.println(userDto);
 
@@ -31,6 +34,7 @@ public class EncryptAnnotationAspect {
         userDto.setPassword(encodedPassword);
     }
 
+    //Оповещалка после
     @After(value = "callEncryptableMethod(userDto)", argNames = "userDto")
     public void afterCallEncryptableMethod(UserDto userDto) {
         System.out.println("Сущность юзера сохранена в БД, пароль зашифрован");

@@ -6,17 +6,14 @@ import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.project.ghost_forum.dto.UserDto;
-import org.project.ghost_forum.dto.UserRegistrationDto;
 import org.project.ghost_forum.entity.User;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {
-    //@Mapping(target = "roles", ignore = true)
+    @Mapping(target = "roles", ignore = true)
     UserDto toDto(User user);
 
     User toEntity(UserDto user);
-
-    User toEntity(UserRegistrationDto user);
 }
