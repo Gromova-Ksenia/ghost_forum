@@ -1,6 +1,6 @@
 package org.project.ghost_forum.repository;
 
-import org.project.ghost_forum.entity.Post;
+import org.project.ghost_forum.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,9 +10,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, UUID> {
+public interface CommentRepository extends JpaRepository<Comment, UUID> {
 
-    @Query("FROM Post p WHERE p.author.id = :authorId")
-    Optional<List<Post>> findAllByAuthor(UUID authorId);
-
+    @Query("FROM Comment c WHERE c.post.id = :postId")
+    Optional<List<Comment>> findAllByPost(UUID postId);
 }

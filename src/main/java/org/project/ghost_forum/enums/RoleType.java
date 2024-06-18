@@ -7,9 +7,7 @@ public enum RoleType {
 
     ROLE_USER,
 
-    ROLE_ADMIN,
-
-    ROLE_SUPERADMIN;
+    ROLE_ADMIN;
 
     public static RoleType fromString(String role){
         return Arrays.stream(RoleType.values())

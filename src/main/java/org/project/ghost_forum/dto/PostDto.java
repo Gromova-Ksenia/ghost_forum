@@ -20,5 +20,6 @@ public class PostDto {
     private String body;
     private LocalDate creationTime;
     private int rating = 0;
+    private Set<CommentDto> comments;
     private Set<TagDto> tags;
 }

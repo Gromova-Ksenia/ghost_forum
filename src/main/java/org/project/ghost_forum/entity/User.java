@@ -24,9 +24,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "login")
+    @Column(name = "username")
     @NotNull
-    private String login;
+    private String username;
 
     @Column(name = "password")
     @NotNull
@@ -35,10 +35,6 @@ public class User {
     @Column(name = "email")
     @NotNull
     private String email;
-
-    @Column(name = "username")
-    @NotNull
-    private String username;
 
     @Column(name = "description")
     private String description;

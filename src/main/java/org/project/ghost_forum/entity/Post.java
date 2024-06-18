@@ -46,7 +46,7 @@ public class Post {
     private int rating = 0;
 
     @OneToMany(mappedBy = "post")
-    private List<Comment> coments;
+    private Set<Comment> comments;
 
     @JoinTable(name = "post_tags",
             joinColumns = @JoinColumn(name = "post_id"),

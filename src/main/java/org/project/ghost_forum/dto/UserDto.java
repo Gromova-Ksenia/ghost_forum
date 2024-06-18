@@ -16,11 +16,10 @@ import java.util.UUID;
 @Builder
 public class UserDto {
     private UUID id;
-    private String login;
+    private String username;
     private String password;
     private String email;
-    private String username;
     private LocalDate registrationDate;
     private String description;
-    private Set<Role> roles;
+    private Set<RoleDto> roles;
 }

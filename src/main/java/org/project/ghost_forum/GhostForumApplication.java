@@ -26,32 +26,6 @@ import java.util.function.Function;
 public class GhostForumApplication {
 	public static void main(String[] args) {
 
-//		TagMapper mapper = new TagMapperImpl();
-//
-//		TagService service = new TagService();
-//
-//		Tag arttag = new Tag();
-//		arttag.setName(TagName.АРТ);
-//		//arttag.setId(UUID.randomUUID());
-//		service.addTag(arttag);
-
-//		Tag hctag = new Tag();
-//		hctag.setName(TagName.ХЕДКАНОН);
-//
-//		Tag cosplaytag = new Tag();
-//		cosplaytag.setName(TagName.КОСПЛЕЙ);
-//
-//		Tag covertag = new Tag();
-//		covertag.setName(TagName.КАВЕР);
-//
-//		Tag fictag = new Tag();
-//		fictag.setName(TagName.ФАНФИК);
-//
-//		Tag handtag = new Tag();
-//		handtag.setName(TagName.ХЕНДМЕЙД);
-//
-//		Tag videotag = new Tag();
-//		videotag.setName(TagName.ВИДЕО);
 		SpringApplication.run(GhostForumApplication.class, args);
 	}
 

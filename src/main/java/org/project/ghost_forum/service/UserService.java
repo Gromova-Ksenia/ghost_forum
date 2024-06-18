@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.project.ghost_forum.annotations.Encrypt;
+import org.project.ghost_forum.dto.RoleDto;
 import org.project.ghost_forum.dto.UserDto;
 import org.project.ghost_forum.entity.Role;
 import org.project.ghost_forum.entity.User;
@@ -27,12 +28,13 @@ public class UserService {
     private final UserMapper mapper;
     private final UserRepository repository;
     private final RoleService roleService;
+    private final CommentService commentService;
     @PersistenceContext
     private EntityManager entityManager;
 
     @Encrypt //Добавляем нового юзера
     public UserDto addUser(UserDto userDto) {
-        List<UUID> roleIds = userDto.getRoles().stream().map(Role::getId).collect(Collectors.toList());
+        List<UUID> roleIds = userDto.getRoles().stream().map(RoleDto::getId).collect(Collectors.toList());
 
         Set<Role> roles = roleService.getRoles(roleIds);
 
@@ -42,17 +44,23 @@ public class UserService {
         User savedEntity = repository.save(entity);
 
         UserDto dto = mapper.toDto(savedEntity);
+        dto.setRoles(roles.stream()
+                .map(role -> RoleDto.builder()
+                    .id(role.getId())
+                    .role(role.getRoleType().name())
+                    .build())
+                .collect(Collectors.toSet()));
 
         return dto;
     }
 
     //Я ничё не понял
-    public UserDto getCurrent() {
+    public UserDto getCurrent() {//Запрашиваем нынешнего пользователя
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Object principal = authentication.getPrincipal();
 
-        if (principal instanceof UserDetails) {
+        if (principal instanceof UserDetails) {//Если найден,апреобразуем и получаем юзернейм
             UserDetails userDetails = (UserDetails) principal;
             String username = userDetails.getUsername();
 
@@ -68,6 +76,16 @@ public class UserService {
         return repository.findById(id)
                 .map(user -> {
                     user.setIsBanned(true);
+                    repository.save(user);
+                    return Boolean.TRUE;
+                })
+                .orElse(Boolean.FALSE);
+    }
+
+    public Boolean unbanUser(UUID id){
+        return repository.findById(id)
+                .map(user -> {
+                    user.setIsBanned(false);
                     repository.save(user);
                     return Boolean.TRUE;
                 })

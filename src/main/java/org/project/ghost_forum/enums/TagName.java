@@ -11,7 +11,9 @@ public enum TagName {
     КАВЕР,
     ФАНФИК,
     ХЕНДМЕЙД,
-    ВИДЕО;
+    ВИДЕО,
+    NSFW,
+    ДРУГОЕ;
 
     public static TagName fromString(String tag){
         return Arrays.stream(TagName.values())

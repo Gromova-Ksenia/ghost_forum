@@ -1,10 +1,10 @@
 package org.project.ghost_forum.service;
 
 import lombok.RequiredArgsConstructor;
-import org.project.ghost_forum.mapper.TagMapper;
-import org.project.ghost_forum.repository.TagRepository;
+import org.project.ghost_forum.entity.Comment;
+import org.project.ghost_forum.mapper.CommentMapper;
+import org.project.ghost_forum.repository.CommentRepository;
 import org.springframework.stereotype.Service;
-import org.project.ghost_forum.entity.Tag;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class TagService {
-    private final TagRepository repository;
-    private final TagMapper mapper;
+public class CommentService {
+    CommentRepository repository;
+    CommentMapper mapper;
 
-    public Set<Tag> getTags(List<UUID> tagIds){
-        return tagIds.stream()
+    public Set<Comment> getComments(List<UUID> commentIds){
+        return commentIds.stream()
                 .map(repository::findById)
                 .map(Optional::get)
                 .collect(Collectors.toSet());

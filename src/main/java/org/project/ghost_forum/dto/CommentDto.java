@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class CommentDto {
-    private UUID commentId;
+    private UUID id;
     private UUID postId;
     private UUID userId;
     private LocalDate creationTime;
