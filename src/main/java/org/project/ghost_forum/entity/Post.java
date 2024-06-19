@@ -1,14 +1,12 @@
 package org.project.ghost_forum.entity;
 import jakarta.persistence.*;
-//import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -39,7 +37,7 @@ public class Post {
 
     @Column(name = "creation_time")
     @NotNull
-    private LocalDate creationTime;
+    private LocalDateTime creationTime;
 
     @Column(name = "rating")
     @Builder.Default

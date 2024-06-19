@@ -1,6 +1,7 @@
 package org.project.ghost_forum.service;
 
 import lombok.RequiredArgsConstructor;
+import org.project.ghost_forum.dto.TagDto;
 import org.project.ghost_forum.mapper.TagMapper;
 import org.project.ghost_forum.repository.TagRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TagService {
     private final TagRepository repository;
-    private final TagMapper mapper;
 
     public Set<Tag> getTags(List<UUID> tagIds){
         return tagIds.stream()
@@ -24,4 +24,5 @@ public class TagService {
                 .map(Optional::get)
                 .collect(Collectors.toSet());
     }
+
 }

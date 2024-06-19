@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -32,6 +33,7 @@ public class UserService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     @Encrypt //Добавляем нового юзера
     public UserDto addUser(UserDto userDto) {
         List<UUID> roleIds = userDto.getRoles().stream().map(RoleDto::getId).collect(Collectors.toList());
@@ -72,6 +74,7 @@ public class UserService {
         return null;
     }
 
+    @Transactional
     public Boolean banUser(UUID id) {
         return repository.findById(id)
                 .map(user -> {
@@ -82,6 +85,7 @@ public class UserService {
                 .orElse(Boolean.FALSE);
     }
 
+    @Transactional
     public Boolean unbanUser(UUID id){
         return repository.findById(id)
                 .map(user -> {

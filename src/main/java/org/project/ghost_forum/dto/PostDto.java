@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,10 +17,19 @@ import java.util.UUID;
 public class PostDto {
     private UUID id;
     private UUID authorId;
+    private String authorUsername;
     private String title;
     private String body;
-    private LocalDate creationTime;
+    private LocalDateTime creationTime;
     private int rating = 0;
     private Set<CommentDto> comments;
     private Set<TagDto> tags;
+
+    public void increaseRating(){
+        this.rating+=1;
+    }
+
+    public void decreaseRating(){
+        this.rating-=1;
+    }
 }

@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface CommentRepository extends JpaRepository<Comment, UUID> {
 
     @Query("FROM Comment c WHERE c.post.id = :postId")
-    Optional<List<Comment>> findAllByPost(UUID postId);
+    List<Comment> findAllByPost(UUID postId);
 }

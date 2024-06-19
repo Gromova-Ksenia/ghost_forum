@@ -13,6 +13,6 @@ import java.util.UUID;
 public interface PostRepository extends JpaRepository<Post, UUID> {
 
     @Query("FROM Post p WHERE p.author.id = :authorId")
-    Optional<List<Post>> findAllByAuthor(UUID authorId);
+    List<Post> findAllByAuthor(UUID authorId);
 
 }

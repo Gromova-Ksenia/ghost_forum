@@ -14,6 +14,7 @@ import org.project.ghost_forum.entity.Comment;
 public interface CommentMapper {
  @Mapping(target = "postId", source = "post.id")
  @Mapping(target = "userId", source = "user.id")
+ @Mapping(target = "userUsername", source = "user.username")
  CommentDto toDto (Comment comment);
 
  @Mapping(source = "postId", target = "post.id")

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -32,7 +33,7 @@ public class Comment {
 
     @Column(name = "creation_time")
     @NotNull
-    private LocalDate creationTime;
+    private LocalDateTime creationTime;
 
     @Column(name = "body", length = 5000)
     @NotNull
