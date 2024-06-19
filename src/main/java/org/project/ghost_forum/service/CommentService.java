@@ -54,19 +54,19 @@ public class CommentService {
         repository.deleteById(id);
     }
 
-//    private CommentDto transformToDto(Comment comment){
-//        return CommentDto.builder()
-//                .id(comment.getId())
-//                .postId(comment.getPost().getId())
-//                .userId(comment.getUser().getId())
-//                .userUsername(comment.getUser().getUsername())
-//                .creationTime(comment.getCreationTime())
-//                .body(comment.getBody())
-//                .build();
-//    }
+    private CommentDto transformToDto(Comment comment){
+        return CommentDto.builder()
+                .id(comment.getId())
+                .postId(comment.getPost().getId())
+                .userId(comment.getUser().getId())
+                .userUsername(comment.getUser().getUsername())
+                .creationTime(comment.getCreationTime())
+                .body(comment.getBody())
+                .build();
+    }
 
     public List<CommentDto> getCommentsToPost(UUID postId){
         return repository.findAllByPost(postId).stream()
-                .map(mapper::toDto).toList();
+                .map(this::transformToDto).toList();
     }
 }
